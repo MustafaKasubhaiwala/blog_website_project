@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+</head>
+<body>
+
+<h2><%= post.title %></h2>
+
+<p><%= post.content %></p>
+
+<hr>
+
+<h3>Reviews</h3>
+
+<% comments.forEach(c => { %>
+    <p>
+        <b><%= c.name %></b>: <%= c.comment %>
+
+        <% if (user.user_id === c.user_id || user.role === 'admin') { %>
+            <a href="/comment/edit/<%= c.comment_id %>">Edit</a>
+            |
+            <a href="/comment/delete/<%= c.comment_id %>">Delete</a>
+        <% } %>
+    </p>
+<% }) %>
+
+<hr>
+
+<form method="POST" action="/comment/<%= post.post_id %>">
+    <textarea name="comment" placeholder="Write your review..." required></textarea>
+    <br><br>
+    <button type="submit">Add Review</button>
+</form>
+
+<br>
+
+<a href="/dashboard">Back</a>
+
+</body>
+</html>

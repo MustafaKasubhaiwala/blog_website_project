@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Review</title>
+</head>
+<body>
+
+<h2>Edit Review</h2>
+
+<form method="POST">
+    <textarea name="comment" required><%= comment.comment %></textarea>
+
+    
+    <input type="hidden" name="post_id" value="<%= comment.post_id %>">
+
+    <br><br>
+    <button type="submit">Update</button>
+</form>
+
+<br>
+
+<a href="/post/<%= comment.post_id %>">Cancel</a>
+
+</body>
+</html>

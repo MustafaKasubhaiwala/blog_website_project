@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h2>All Posts</h2>
+
+<form method="GET" action="/search">
+    <input name="q" placeholder="Search by title" required>
+    <button type="submit">Search</button>
+</form>
+
+<br>
+
+<% if (user.role !== 'user') { %>
+    <a href="/post/new">Create Post</a>
+<% } %>
+
+<hr>
+
+<% posts.forEach(p => { %>
+
+    <h3>
+        <a href="/post/<%= p.post_id %>"><%= p.title %></a>
+    </h3>
+
+    <p><%= p.content.substring(0,120) %>...</p>
+
+    <small>By <%= p.name %></small>
+
+    <% if (user.role === 'admin' || user.user_id === p.user_id) { %>
+        <br>
+        <a href="/post/edit/<%= p.post_id %>">Edit</a>
+        |
+        <a href="/post/delete/<%= p.post_id %>">Delete</a>
+    <% } %>
+
+    <hr>
+
+<% }) %>
+
+<a href="/logout">Logout</a>
+
+</body>
+</html>
